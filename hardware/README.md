@@ -8,5 +8,7 @@
  Shematic can be found in subfolder schematic     
  Board for home fabricate - Arduino_pcb.jpg
 
- 2. Second board it's small round board that consist of 9 sk6812 addresable led, ttp223 touch button controller, and piezo sensor on bottom side. It's covered by transparen plastic that covered by transparent plastic, on bottom side it has small glued round piece of copper foil, that connects to ttp223 input. 
+ 2. Second board it's small round board that consist of 9 sk6812 addresable led, ttp223 touch button controller, and piezo sensor on bottom side. It's covered by transparen plastic that covered by transparent plastic, on bottom side it has small glued round piece of copper foil, that connects to ttp223 input. Led sk6812 used in 4020 bottom sided package, that solders in wrong way - side to up. Unfourtanetly, i can't found a common led's wit package smaller than 3535. 
  Schematic so simple, that not needed, board image for home fabricate - Round pcb.jpg
+ Photo
+ ![Img](/img/photo_of_ring.png)
