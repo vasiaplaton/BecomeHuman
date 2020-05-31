@@ -1,0 +1,244 @@
+class Tab2 extends StatefulWidget {
+
+
+  @override
+  _Tab2State createState() {
+    return new _Tab2State();
+  }
+}
+
+class _Tab2State extends State<Tab2> {
+  /// mood
+  Color lineColor;
+  Timer timer;
+  Timer timer1;
+  int brightness = 255;
+  bool spaces = true;
+  bool needUpdateEffect = true;
+  bool needUpdateSettings = true;
+  bool dir = true;
+  bool dir1 = true;
+  bool fade = true;
+  String test = "22";
+  int effect = 0;
+  static WorkWithBl bleadapter1;
+  @override
+  void initState() {
+    super.initState();
+    bleadapter1 = MyHomePage.bleadapter;
+    lineColor = Color.fromARGB(255, 255, 0, 0);
+    timer = Timer.periodic(new Duration(milliseconds: 100), (Timer t)
+    {
+      Color effectColor;
+      if (effect == 0) {
+        effectColor = Color.fromARGB(255, 0, 0, 255);
+      }
+      if (effect == 1 || effect == 2) {
+        effectColor = Colors.amber;
+      }
+      if (effect == 3 || effect == 4) {
+        effectColor = Color.fromARGB(255, 255, 0, 0);
+      }
+      if (effect == 5) {
+        if (dir1) {
+          dir1 = false;
+          effectColor = Color.fromARGB(255, 255, 0, 0);
+        }
+        else {
+          dir1 = true;
+          effectColor = Color.fromARGB(0, 255, 0, 0);
+        }
+      }
+      if (fade && effect!=5) {
+        setState(() {
+          lineColor = effectColor.withAlpha(brightness);
+        });
+      } else {
+        super.setState(() {
+          lineColor = effectColor;
+        });
+      }
+      if (dir) {
+        brightness += 15;
+        if (brightness >= 255) {
+          dir = false;
+        }
+      } else {
+        brightness -= 15;
+        if (brightness <= 40) {
+          dir = true;
+        }
+      }
+    });
+
+    timer1 = Timer.periodic(new Duration(milliseconds: 200), (Timer t) {
+      String str = "s";
+      if(needUpdateSettings){
+        needUpdateSettings = false;
+
+        if(fade){
+          str += "1";
+        }
+        else{
+          str += "0";
+        }
+        if(spaces){
+          str += "1";
+        }
+        else{
+          str += "0";
+        }
+        bleadapter1.sendMessage(str);
+      }
+      if(needUpdateEffect){
+        needUpdateEffect = false;
+        bleadapter1.sendMessage("e"+effect.toString());
+        if ( effect == 1 || effect == 3 ) {
+          effect--;
+        }
+      }
+      str = bleadapter1.getMessage();
+      if(str.isNotEmpty){
+        int effectGetted = int.parse(str[1]);
+        if (str[0] == "e" && effectGetted >= 0 && effectGetted < 6 ){
+          setState(() {
+            effect = effectGetted;
+          });
+        }
+      }
+    });
+  }
+  void dispose() {
+    // Additional disposal code
+    print("dispose Tab2");
+    timer.cancel();
+    timer1.cancel();
+    super.dispose();
+  }
+
+  bool colorchanged = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Center(
+            child:
+            Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+
+                children: [
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.arrow_back_ios),
+                          onPressed: (){
+                            print("back");
+                            print("BEFORE" + effect.toString());
+                            if (effect > 0) {
+                              effect--;
+                              if ((effect == 2)) {
+                                effect--;
+                              }
+                              print("after" + effect.toString());
+                              needUpdateEffect = true;
+                            }
+                          },
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: CustomPaint(
+                            painter: new ShapesPainter(lineColor: lineColor, spaces: spaces, effect: effect),
+                            child: Container(
+                              height: 140,
+                              width: 200,
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.arrow_forward_ios),
+                          onPressed: (){
+                            print("forward");
+                            if (effect + 1 < 6) {
+                              effect++;
+                              if (effect == 1 || effect == 3) {
+                                effect++;
+                              }
+                              needUpdateEffect = true;
+                            }
+                          },
+                        ),
+                      ]
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.autorenew),
+                          onPressed: (){
+                            print("round_effect");
+                            setState(() {
+                              spaces = !spaces;
+                              needUpdateSettings = true;
+
+                            });
+                          },
+                        ),
+                        Container(
+                          height: 30,
+                          width: 1,
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.timelapse),
+                          onPressed: (){
+                            print("spaces");
+                            setState(() {
+                              fade = !fade;
+                              needUpdateSettings = true;
+                            });
+                          },
+                        ),
+                      ]
+                  )
+                ]
+
+            )
+        )
+    );
+  }
+
+/* Future<void> _colordialog(BuildContext context, int index) async {
+    HSVColor stdcolor = Tab2.colorStd[index];
+    HSVColor _color = widget.color[index];
+    return showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: new PaletteValuePickerPage(
+              startingcolor: _color,
+              onColorChanged: (newColor) {
+                _color = newColor;
+              },
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: const Text('Standart color'),
+                onPressed: () {
+                  super.setState(() => this.onColorChanged(index, stdcolor));
+                  colorchanged = true;
+                  Navigator.of(context).pop();
+                },
+              ),
+              FlatButton(
+                child: const Text('Append'),
+                onPressed: () {
+                  super.setState(() => this.onColorChanged(index, _color));
+                  colorchanged = true;
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
+  }*/
+}
