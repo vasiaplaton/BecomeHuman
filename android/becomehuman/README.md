@@ -29,7 +29,7 @@ When effects goes to previous used round effect(watch gif on readme in root dire
 ### * Color
 This mode let you to pick constant color from pallete picker and set brightness
 #### Screenshot
-![Screen](/img/mood.jpg)
+![Screen](/img/color.jpg)
 
 ## Bluetooth protocol
 ### Send
