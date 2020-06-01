@@ -17,8 +17,7 @@
 * C1 - capacitor for touch button - 22pF
 * U3 - ttp223
 * U23-u31 - sk6812    
-      
-![Img](/img/ring_board.png)    
-          
- Photo      
- ![Img](/img/photo_of_ring.jpg)     
+### Photos
+![Img](/img/ring_board.png)   
+ 
+![Img](/img/photo_of_ring.jpg)     
