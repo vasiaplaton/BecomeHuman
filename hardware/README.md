@@ -7,7 +7,7 @@
  ### Pcb components falues can be found in schematic
  ![Img](/img/big_board.png)
  Photo
- ![Img](/img/big_board_photo.png)
+ ![Img](/img/big_board_photo.jpg)
  Shematic can be found in subfolder schematic     
  Board for home fabricate - Arduino_pcb.jpg
 ## Second small led ring board
@@ -16,7 +16,9 @@
  ### Pcb components values
 * C1 - capacitor for touch button - 22pF
 * U3 - ttp223
-* U23-u31 - sk6812
-  ![Img](/img/ring_board.png)
- Photo
- ![Img](/img/photo_of_ring.png)
+* U23-u31 - sk6812    
+      
+![Img](/img/ring_board.png)    
+          
+ Photo      
+ ![Img](/img/photo_of_ring.jpg)     

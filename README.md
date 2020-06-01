@@ -15,5 +15,5 @@ This is my project that cosplays LED indicator from computer play Detroit: Becom
 ## More of usefull info you can find in README in subfolders.
 ## In folder video you can find video(russian language) about modes and work of the project and app
 ## In /android/becomehuman you can find APK for android installing
-### effects:
+### effects:      
 ![Gif](/img/effects.gif)
