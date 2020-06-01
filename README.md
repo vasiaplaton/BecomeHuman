@@ -15,5 +15,10 @@ This is my project that cosplays LED indicator from computer play Detroit: Becom
 ## More of usefull info you can find in README in subfolders.
 ## In folder video you can find video(russian language) about modes and work of the project and app
 ## In /android/becomehuman you can find APK for android installing
-### effects:      
+### Efects
+1. Low stress(slowly blue fade and round effect)
+2. Medium stress (slowly yellow fade and round effect)
+3. High stress(slowly red fade and round effect )
+4. Very high stress(fast blinking red)
+When effects goes to previous used round effect(watch gif on readme in root directory, /img/effect.gif), when go forward this effect doesn't enabled
 ![Gif](/img/effects.gif)

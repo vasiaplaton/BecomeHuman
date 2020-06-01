@@ -2,10 +2,17 @@
 ### Features
 * Pulse detect by piezo
 * Super simple protocol that works over bluetjoth uart protocol. 
-* Work with 9 addresable led and realistic effect exactly the same as in play.
 * Work with buttons - 1click next effect, 2clicks previous effect
+* Work with 9 addresable led and realistic effect exactly the same as in play.
 ### Known limitations
 * Pulse detect don't work so good if you in moving.
+
+### Efects
+1. Low stress(slowly blue fade and round effect)
+2. Medium stress (slowly yellow fade and round effect)
+3. High stress(slowly red fade and round effect )
+4. Very high stress(fast blinking red)
+When effects goes to previous used round effect(watch gif on readme in root directory, /img/effect.gif), when go forward this effect doesn't enabled
 
 ## Bluetooth protocol
 ### Recieve
